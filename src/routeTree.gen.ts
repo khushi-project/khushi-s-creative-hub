@@ -11,8 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as GamesRouteImport } from './routes/games'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CalculatorsRouteImport } from './routes/calculators'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as IndexRouteImport } from './routes/index'
@@ -28,6 +30,11 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GamesRoute = GamesRouteImport.update({
+  id: '/games',
+  path: '/games',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GalleryRoute = GalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
@@ -36,6 +43,11 @@ const GalleryRoute = GalleryRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CalculatorsRoute = CalculatorsRouteImport.update({
+  id: '/calculators',
+  path: '/calculators',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -61,8 +73,10 @@ const AuthDashboardRoute = AuthDashboardRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/calculators': typeof CalculatorsRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
+  '/games': typeof GamesRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/dashboard': typeof AuthDashboardRoute
@@ -70,8 +84,10 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/calculators': typeof CalculatorsRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
+  '/games': typeof GamesRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/dashboard': typeof AuthDashboardRoute
@@ -81,8 +97,10 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteWithChildren
   '/about': typeof AboutRoute
+  '/calculators': typeof CalculatorsRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
+  '/games': typeof GamesRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/_auth/dashboard': typeof AuthDashboardRoute
@@ -92,8 +110,10 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/calculators'
     | '/contact'
     | '/gallery'
+    | '/games'
     | '/login'
     | '/register'
     | '/dashboard'
@@ -101,8 +121,10 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/calculators'
     | '/contact'
     | '/gallery'
+    | '/games'
     | '/login'
     | '/register'
     | '/dashboard'
@@ -111,8 +133,10 @@ export interface FileRouteTypes {
     | '/'
     | '/_auth'
     | '/about'
+    | '/calculators'
     | '/contact'
     | '/gallery'
+    | '/games'
     | '/login'
     | '/register'
     | '/_auth/dashboard'
@@ -122,8 +146,10 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRouteWithChildren
   AboutRoute: typeof AboutRoute
+  CalculatorsRoute: typeof CalculatorsRoute
   ContactRoute: typeof ContactRoute
   GalleryRoute: typeof GalleryRoute
+  GamesRoute: typeof GamesRoute
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
 }
@@ -144,6 +170,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/games': {
+      id: '/games'
+      path: '/games'
+      fullPath: '/games'
+      preLoaderRoute: typeof GamesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gallery': {
       id: '/gallery'
       path: '/gallery'
@@ -156,6 +189,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calculators': {
+      id: '/calculators'
+      path: '/calculators'
+      fullPath: '/calculators'
+      preLoaderRoute: typeof CalculatorsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -203,8 +243,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRouteWithChildren,
   AboutRoute: AboutRoute,
+  CalculatorsRoute: CalculatorsRoute,
   ContactRoute: ContactRoute,
   GalleryRoute: GalleryRoute,
+  GamesRoute: GamesRoute,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
 }
