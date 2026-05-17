@@ -25,6 +25,7 @@ type Artwork = {
 function Dashboard() {
   const nav = useNavigate();
   const [userId, setUserId] = useState<string | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [artworks, setArtworks] = useState<Artwork[]>([]);
   const [likes, setLikes] = useState<Record<string, { count: number; liked: boolean }>>({});
   const [comments, setComments] = useState<Record<string, { id: string; user_id: string; body: string; created_at: string }[]>>({});
@@ -33,7 +34,19 @@ function Dashboard() {
   const [uploadOpen, setUploadOpen] = useState(false);
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => setUserId(data.user?.id ?? null));
+    supabase.auth.getUser().then(async ({ data }) => {
+      const uid = data.user?.id ?? null;
+      setUserId(uid);
+      if (uid) {
+        const { data: r } = await supabase
+          .from("user_roles")
+          .select("role")
+          .eq("user_id", uid)
+          .eq("role", "admin")
+          .maybeSingle();
+        setIsAdmin(!!r);
+      }
+    });
   }, []);
 
   const load = useCallback(async () => {
@@ -109,9 +122,11 @@ function Dashboard() {
           <p className="text-sm text-muted-foreground">Share your art, react and comment.</p>
         </div>
         <div className="flex gap-2">
-          <button onClick={() => setUploadOpen(true)} className="btn-glow rounded-xl px-4 py-2 text-sm flex items-center gap-2">
-            <Upload className="h-4 w-4" /> Upload artwork
-          </button>
+          {isAdmin && (
+            <button onClick={() => setUploadOpen(true)} className="btn-glow rounded-xl px-4 py-2 text-sm flex items-center gap-2">
+              <Upload className="h-4 w-4" /> Upload artwork
+            </button>
+          )}
           <button onClick={logout} className="glass rounded-xl px-4 py-2 text-sm flex items-center gap-2 hover:bg-white/10">
             <LogOut className="h-4 w-4" /> Sign out
           </button>
@@ -158,7 +173,7 @@ function Dashboard() {
                     <h3 className="font-semibold">{a.title}</h3>
                     {a.description && <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{a.description}</p>}
                   </div>
-                  {a.user_id === userId && (
+                  {isAdmin && (
                     <button onClick={() => removeArt(a)} className="text-muted-foreground hover:text-destructive p-1">
                       <Trash2 className="h-4 w-4" />
                     </button>
