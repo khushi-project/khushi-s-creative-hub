@@ -25,6 +25,7 @@ type Artwork = {
 function Dashboard() {
   const nav = useNavigate();
   const [userId, setUserId] = useState<string | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [artworks, setArtworks] = useState<Artwork[]>([]);
   const [likes, setLikes] = useState<Record<string, { count: number; liked: boolean }>>({});
   const [comments, setComments] = useState<Record<string, { id: string; user_id: string; body: string; created_at: string }[]>>({});
