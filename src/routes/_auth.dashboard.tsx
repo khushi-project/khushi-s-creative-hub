@@ -122,9 +122,11 @@ function Dashboard() {
           <p className="text-sm text-muted-foreground">Share your art, react and comment.</p>
         </div>
         <div className="flex gap-2">
-          <button onClick={() => setUploadOpen(true)} className="btn-glow rounded-xl px-4 py-2 text-sm flex items-center gap-2">
-            <Upload className="h-4 w-4" /> Upload artwork
-          </button>
+          {isAdmin && (
+            <button onClick={() => setUploadOpen(true)} className="btn-glow rounded-xl px-4 py-2 text-sm flex items-center gap-2">
+              <Upload className="h-4 w-4" /> Upload artwork
+            </button>
+          )}
           <button onClick={logout} className="glass rounded-xl px-4 py-2 text-sm flex items-center gap-2 hover:bg-white/10">
             <LogOut className="h-4 w-4" /> Sign out
           </button>
