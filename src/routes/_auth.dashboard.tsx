@@ -173,7 +173,7 @@ function Dashboard() {
                     <h3 className="font-semibold">{a.title}</h3>
                     {a.description && <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{a.description}</p>}
                   </div>
-                  {a.user_id === userId && (
+                  {isAdmin && (
                     <button onClick={() => removeArt(a)} className="text-muted-foreground hover:text-destructive p-1">
                       <Trash2 className="h-4 w-4" />
                     </button>
