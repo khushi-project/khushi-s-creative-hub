@@ -26,8 +26,8 @@ function Register() {
     });
     setLoading(false);
     if (error) return toast.error(error.message);
-    toast.success("Welcome to Khushi's Hub!");
-    nav({ to: "/dashboard" });
+    toast.success("Welcome to Khushi's Hub! Please check your email to confirm.");
+    nav({ to: "/" });
   }
 
   async function google() {
