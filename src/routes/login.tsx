@@ -21,7 +21,7 @@ function Login() {
     setLoading(false);
     if (error) return toast.error(error.message);
     toast.success("Welcome back!");
-    nav({ to: "/dashboard" });
+    nav({ to: "/" });
   }
 
   async function google() {

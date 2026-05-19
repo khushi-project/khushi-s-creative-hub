@@ -1,6 +1,6 @@
 import { Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X, Sparkles, Instagram, Youtube, Facebook, Linkedin } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Session } from "@supabase/supabase-js";
 import { Toaster } from "@/components/ui/sonner";
@@ -107,6 +107,19 @@ export function Layout() {
       <footer className="border-t border-white/10 mt-20">
         <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
           <p>© {new Date().getFullYear()} Khushi Kishor Bhandari. Crafted with ✨</p>
+          <div className="flex items-center gap-3">
+            {[
+              { Icon: Instagram, href: "https://www.instagram.com/iam_khushi_bhandari", label: "Instagram" },
+              { Icon: Youtube, href: "https://www.youtube.com/@khushisarts1075", label: "YouTube" },
+              { Icon: Facebook, href: "https://www.facebook.com/share/1A7ixhriaM/", label: "Facebook" },
+              { Icon: Linkedin, href: "https://www.linkedin.com/in/khushi-k-bhandari", label: "LinkedIn" },
+            ].map(({ Icon, href, label }) => (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
+                className="h-9 w-9 rounded-full glass flex items-center justify-center hover:text-foreground hover:bg-white/10 transition">
+                <Icon className="h-4 w-4" />
+              </a>
+            ))}
+          </div>
           <p>khushikbhandari2003@gmail.com</p>
         </div>
       </footer>
