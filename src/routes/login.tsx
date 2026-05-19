@@ -34,6 +34,9 @@ function Login() {
       <form onSubmit={onSubmit} className="space-y-3">
         <Field icon={Mail} type="email" placeholder="you@example.com" value={email} onChange={setEmail} required />
         <Field icon={Lock} type="password" placeholder="Password" value={password} onChange={setPassword} required />
+        <div className="text-right">
+          <Link to="/forgot-password" className="text-xs text-muted-foreground hover:text-foreground">Forgot password?</Link>
+        </div>
         <button disabled={loading} className="w-full btn-glow rounded-xl py-3 text-sm font-medium disabled:opacity-50">
           {loading ? "Signing in…" : "Sign in"}
         </button>
